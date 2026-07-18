@@ -1,0 +1,20 @@
+{
+  "skill_id": "CLRTY-ALE-001",
+  "name": "Atomic Liquidity Engine",
+  "components": [
+    "https://www.clarity-fintech.com/",
+    "https://tether.to",
+    "https://1inch.io"
+  ],
+  "operational_logic": {
+    "intent": "HFT-to-Stablecoin Settlement",
+    "execution_path": "Intent -> 1inch Fusion -> USDT Finality",
+    "substrate": "CLRTY-1"
+  },
+  "security_hardening": "eBPF-monitored socket connection to API endpoints",
+  "clrty1": {
+    "chain_id": "clrty-1",
+    "numeric_chain_id": 1202,
+    "rpc_env": "CLRTY_L1_RPC"
+  }
+}
