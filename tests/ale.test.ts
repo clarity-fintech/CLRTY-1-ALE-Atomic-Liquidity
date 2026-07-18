@@ -23,11 +23,20 @@ describe("clrty1 config", () => {
   });
 });
 
+const offlineEnv = {
+  CLRTY_RPC_SMOKE: "0",
+  CLRTY_L1_RPC: "http://127.0.0.1:9",
+  CLRTY_L1_RPC_FALLBACK: "http://127.0.0.1:9",
+  CLRTY_API_BASE: "http://127.0.0.1:9",
+  CLRTY_EXCHANGE_HEALTH: "http://127.0.0.1:9",
+  ONEINCH_API_KEY: "",
+};
+
 describe("execute_ale_trade", () => {
   it("fail-closed when probe fails and not dryRun", async () => {
     const result = await execute_ale_trade(
       { amount: "1000", dryRun: false },
-      { CLRTY_RPC_SMOKE: "0", CLRTY_L1_RPC: "http://127.0.0.1:9", ONEINCH_API_KEY: "" },
+      offlineEnv,
     );
     expect(result.ok).toBe(false);
     expect(result.status).toBe("rejected_probe");
@@ -36,7 +45,7 @@ describe("execute_ale_trade", () => {
   it("dryRun proceeds with mock Fusion + USDT settle log", async () => {
     const result = await execute_ale_trade(
       { amount: "2500", srcToken: "ETH", dstToken: "USDT", dryRun: true },
-      { CLRTY_RPC_SMOKE: "0", CLRTY_L1_RPC: "http://127.0.0.1:9", ONEINCH_API_KEY: "" },
+      offlineEnv,
     );
     expect(result.ok).toBe(true);
     expect(result.quote?.mode).toBe("mock");
